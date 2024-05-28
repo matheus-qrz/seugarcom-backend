@@ -1,0 +1,14 @@
+// Req's
+POST http://localhost:3333/user
+Content-Type: application/json
+
+{
+  "firstName": "Jubinilson",
+  "lastName": "the Godnilson",
+  "email": "matheusqrz_@hotmail.com",
+  "password": "senha123",
+  "role": "ADMIN",
+}
+
+###
+GET http://localhost:3333/user
