@@ -8,7 +8,7 @@ const restaurantRouter = express.Router();
  *  post:
  *      description: Register Restaurant endpoint
  */
-restaurantRouter.post("/create", function (req, res) {
+restaurantRouter.post("/restaurants/create", function (req, res) {
   restaurantController.create;
 });
 
@@ -18,7 +18,7 @@ restaurantRouter.post("/create", function (req, res) {
  *  get:
  *      description: Get All registered Restaurants
  */
-restaurantRouter.get("/getall", function (req, res) {
+restaurantRouter.get("/restaurants/getall", function (req, res) {
   restaurantController.getAll;
 });
 
@@ -28,7 +28,7 @@ restaurantRouter.get("/getall", function (req, res) {
  *  get:
  *      description: Get registered Restaurant by Id endpoint
  */
-restaurantRouter.get("/:id", function (req, res) {
+restaurantRouter.get("/restaurants/:id", function (req, res) {
   restaurantController.getRestaurantById;
 });
 
@@ -38,7 +38,7 @@ restaurantRouter.get("/:id", function (req, res) {
  *  patch:
  *      description: Update registered restaurant endpoint
  */
-restaurantRouter.patch("/:id/details", function (req, res) {
+restaurantRouter.patch("/restaurants/:id/details", function (req, res) {
   restaurantController.update;
 });
 
@@ -48,7 +48,7 @@ restaurantRouter.patch("/:id/details", function (req, res) {
  *  delete:
  *      description: Delete registered restaurant endpoint
  */
-restaurantRouter.delete("/:id/delete", function (req, res) {
+restaurantRouter.delete("/restaurants/:id/delete", function (req, res) {
   restaurantController.delete;
 });
 

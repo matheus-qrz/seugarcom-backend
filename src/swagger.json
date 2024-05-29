@@ -256,8 +256,14 @@
           }
         },
         "responses": {
-          "404": {
-            "description": "Not found"
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Something went wrong"
           },
           "200": {
             "description": "OK!",
@@ -311,8 +317,14 @@
           }
         },
         "responses": {
+          "400": {
+            "description": "Bad request"
+          },
           "401": {
             "description": "Unauthorized"
+          },
+          "404": {
+            "description": "User not found"
           },
           "500": {
             "description": "Something went wrong"
@@ -364,8 +376,11 @@
           }
         },
         "responses": {
-          "409": {
+          "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "Something went wrong"
@@ -414,8 +429,11 @@
           }
         },
         "responses": {
-          "409": {
+          "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "Something went wrong"
@@ -470,14 +488,14 @@
           }
         },
         "responses": {
-          "409": {
+          "400": {
+            "description": "Restaurant already exists!"
+          },
+          "401": {
             "description": "Unauthorized"
           },
           "500": {
             "description": "Something went wrong"
-          },
-          "400": {
-            "description": "Restaurant already exists!"
           },
           "200": {
             "description": "OK!",
@@ -551,8 +569,9 @@
         "tags": ["Restaurants"],
         "security": [{ "bearerAuth": [] }],
         "parameters": {
-          "in": "path",
-          "id": "number",
+          "id": "id",
+          "name": "name",
+          "in": "query",
           "required": "true"
         },
         "requestBody": {
