@@ -4,7 +4,7 @@ import {
   deleteRequest,
   getRequestByClientName,
   // getRequestByDate,
-  // getRequests,
+  getRequests,
   getRequestById,
   updateRequest,
 } from "../models/Requests.js";
@@ -54,6 +54,20 @@ export const updateRequestController = async (
     return res.status(200).json(userRequest);
   } catch (error) {
     console.log("Error", error);
+  }
+};
+
+export const getAllRequestsController = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const requests = await getRequests();
+
+    return res.status(200).json(requests);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
   }
 };
 
