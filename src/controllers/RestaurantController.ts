@@ -4,7 +4,6 @@ import {
   deleteRestaurant,
   getRestaurantById,
   getRestaurantByName,
-  getRestaurantBySessionToken,
   getRestaurants,
   updateRestaurant,
 } from "../models/Restaurant";
@@ -89,7 +88,7 @@ export const updateRestaurantController = async (
       restaurant.logo = logo;
       restaurant.units = [units];
 
-      await restaurant.save();
+      await updateRestaurant(id, restaurant);
     }
 
     return res.status(200).json(restaurant);

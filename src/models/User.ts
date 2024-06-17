@@ -3,44 +3,47 @@ import validator from "validator";
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  firstName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    validate: [validator.isEmail, "Please, provide a valid email."],
-  },
-  phone: {
-    type: String,
-    required: true,
-    minLength: [11, "Please insert an valid phone number."],
-    maxLength: [13, "Please insert an valid phone number."],
-  },
-  authentication: {
-    required: true,
-    password: {
+const userSchema = new Schema(
+  {
+    firstName: {
       type: String,
       required: true,
-      select: false,
+      trim: true,
     },
-    salt: { type: String, required: true, select: false },
-    sessionToken: { type: String, required: true, select: false },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      validate: [validator.isEmail, "Please, provide a valid email."],
+    },
+    phone: {
+      type: String,
+      required: true,
+      minLength: [11, "Please insert an valid phone number."],
+      maxLength: [13, "Please insert an valid phone number."],
+    },
+    authentication: {
+      required: true,
+      password: {
+        type: String,
+        required: true,
+        select: false,
+      },
+      salt: { type: String, required: true, select: false },
+      sessionToken: { type: String, required: true, select: false },
+    },
+    role: {
+      type: String,
+      enum: ["ADMIN", "MANAGER", "ATTENDANT", "CLIENT"],
+      default: "CLIENT",
+    },
   },
-  role: {
-    type: String,
-    enum: ["ADMIN", "MANAGER", "ATTENDANT", "CLIENT"],
-    default: "CLIENT",
-  },
-});
+  { timestamps: true }
+);
 
 export const UserModel = mongoose.model("User", userSchema);
 

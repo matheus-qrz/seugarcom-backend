@@ -2,30 +2,33 @@ import mongoose from "mongoose";
 import { RestaurantUnitModel } from "./RestaurantUnit";
 const Schema = mongoose.Schema;
 
-const restaurantSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  logo: {
-    type: String,
-    required: true,
-  },
-  cnpj: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  units: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "RestaurantUnit",
+const restaurantSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-  ],
-});
+    logo: {
+      type: String,
+      required: true,
+    },
+    cnpj: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    units: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "RestaurantUnit",
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
 export const RestaurantModel = mongoose.model("Restaurant", restaurantSchema);
 
