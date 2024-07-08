@@ -6,7 +6,6 @@ const requestSchema = new Schema(
   {
     user: {
       type: String,
-      required: false,
       ref: "User",
     },
     items: {
@@ -17,34 +16,27 @@ const requestSchema = new Schema(
       price: { type: Number, required: true },
       product: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
         ref: "Product",
       },
     },
     attendant: {
       type: String,
-      required: true,
     },
     cancelRequest: {
       type: Boolean,
-      required: false,
     },
     modifyItem: {
       type: Boolean,
-      required: false,
     },
     hasTicket: {
       type: Boolean,
-      required: false,
     },
     totalAmount: {
       type: Number,
-      required: true,
       default: 0.0,
     },
     isPaid: {
       type: Boolean,
-      required: true,
       default: false,
     },
     paidAt: {

@@ -11,7 +11,7 @@ import jwt from "jsonwebtoken";
 import swaggerJSDoc from "./swagger.json";
 import swaggerUI from "swagger-ui-express";
 import cookieParser from "cookie-parser";
-import router from "./routes/index.js";
+import router from "./routes/index.ts";
 
 const app = express();
 dotenv.config({ path: "./config/config.env" });

@@ -7,34 +7,29 @@ const userSchema = new Schema(
   {
     firstName: {
       type: String,
-      required: true,
       trim: true,
     },
     lastName: {
       type: String,
-      required: true,
       trim: true,
     },
     email: {
       type: String,
-      required: true,
+
       validate: [validator.isEmail, "Please, provide a valid email."],
     },
     phone: {
       type: String,
-      required: true,
       minLength: [11, "Please insert an valid phone number."],
       maxLength: [13, "Please insert an valid phone number."],
     },
     authentication: {
-      required: true,
       password: {
         type: String,
-        required: true,
         select: false,
       },
-      salt: { type: String, required: true, select: false },
-      sessionToken: { type: String, required: true, select: false },
+      salt: { type: String, select: false },
+      sessionToken: { type: String, select: false },
     },
     role: {
       type: String,
