@@ -6,7 +6,7 @@ import {
   getFoodByName,
   getFoods,
   updateFood,
-} from "../models/Foods";
+} from "../models/Foods.ts";
 
 export const createFoodController = async (
   req: express.Request,

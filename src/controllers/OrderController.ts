@@ -1,27 +1,24 @@
 import express from "express";
+import { validationResult } from "express-validator";
 import {
-  createRequest,
-  deleteRequest,
-  getRequestByClientName,
-  // getRequestByDate,
-  getRequests,
-  getRequestById,
-  updateRequest,
-} from "../models/Requests.js";
+  createOrder,
+  deleteOrder,
+  getOrders,
+  getOrderById,
+  getOrderByClientName,
+  updateOrder,
+} from "../models/Order.ts";
 
-export const createRequestController = async (
+export const createOrderController = async (
   req: express.Request,
   res: express.Response
 ) => {
-  const { items, attendant, totalAmount, isPaid, paidAt } = req.body;
+  const errors = validationResult(req);
+
+  const { id } = req.params;
 
   try {
-    const newRequest = await createRequest({
-      items: [items.name, items.amount, items.prince],
-      attendant,
-      totalAmount,
-      isPaid,
-    });
+    const newRequest = await createOrder(req.body, id);
 
     res.status(201).json(newRequest);
   } catch (error) {
@@ -29,14 +26,14 @@ export const createRequestController = async (
   }
 };
 
-export const updateRequestController = async (
+export const updateOrderController = async (
   req: express.Request,
   res: express.Response
 ) => {
   try {
     const { id } = req.params;
 
-    const userRequest = await getRequestById(id);
+    const userRequest = await getOrderById(id);
 
     const { items, totalAmount, isPaid, paidAt } = req.body;
 
@@ -48,7 +45,7 @@ export const updateRequestController = async (
         (userRequest.isPaid = isPaid),
         (userRequest.paidAt = paymentDate);
 
-      await updateRequest(id, userRequest);
+      await updateOrder(id, userRequest);
     }
 
     return res.status(200).json(userRequest);
@@ -57,12 +54,12 @@ export const updateRequestController = async (
   }
 };
 
-export const getAllRequestsController = async (
+export const getAllOrdersController = async (
   req: express.Request,
   res: express.Response
 ) => {
   try {
-    const requests = await getRequests();
+    const requests = await getOrders();
 
     return res.status(200).json(requests);
   } catch (error) {
@@ -71,13 +68,13 @@ export const getAllRequestsController = async (
   }
 };
 
-export const getRequestByIdController = async (
+export const getOrderByIdController = async (
   req: express.Request,
   res: express.Response
 ) => {
   try {
     const { id } = req.params;
-    const userRequest = await getRequestById(id);
+    const userRequest = await getOrderById(id);
 
     if (!userRequest) {
       return res.status(404).json({ message: "Request does not exist" });
@@ -90,13 +87,13 @@ export const getRequestByIdController = async (
   }
 };
 
-export const getRequestByClientNameController = async (
+export const getOrderByClientNameController = async (
   req: express.Request,
   res: express.Response
 ) => {
   try {
     const { user } = req.params;
-    const userRequest = await getRequestByClientName(user);
+    const userRequest = await getOrderByClientName(user);
 
     if (!user) {
       return res.status(404).json({ message: "User does not exist" });
@@ -113,14 +110,14 @@ export const getRequestByClientNameController = async (
   }
 };
 
-export const deleteRequestController = async (
+export const deleteOrderController = async (
   req: express.Request,
   res: express.Response
 ) => {
   try {
     const { id } = req.params;
 
-    const deletedRequest = await deleteRequest(id);
+    const deletedRequest = await deleteOrder(id);
 
     return res.json(deletedRequest);
   } catch (error) {

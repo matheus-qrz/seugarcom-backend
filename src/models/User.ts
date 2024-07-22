@@ -15,7 +15,6 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-
       validate: [validator.isEmail, "Please, provide a valid email."],
     },
     phone: {
@@ -34,7 +33,6 @@ const userSchema = new Schema(
     role: {
       type: String,
       enum: ["ADMIN", "MANAGER", "ATTENDANT", "CLIENT"],
-      default: "CLIENT",
     },
   },
   { timestamps: true }
@@ -46,7 +44,7 @@ export const UserModel = mongoose.model("User", userSchema);
 // Get All Users
 export const getUsers = () => UserModel.find();
 // Get User by Id
-export const getUserById = (id: string) => UserModel.findById(id);
+export const getUserById = (id: string) => UserModel.findById({ _id: id });
 // Get User by Email for Register Validation
 export const getUserByEmail = (email: string) => UserModel.findOne({ email });
 // Get User by SessionToken for Middleware
@@ -57,7 +55,7 @@ export const createUser = (values: Record<string, any>) =>
   new UserModel(values).save().then((user) => user.toObject());
 // Delete User
 export const deleteUser = (id: string) =>
-  UserModel.findOneAndDelete({ _id: id });
+  UserModel.findByIdAndDelete({ _id: id });
 // Update User
 export const updateUser = (id: string, values: Record<string, any>) =>
   UserModel.findByIdAndUpdate(id, values);

@@ -7,10 +7,6 @@ const foodSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Restaurant",
   },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
-  },
   name: {
     type: String,
   },

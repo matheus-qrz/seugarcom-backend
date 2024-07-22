@@ -6,7 +6,7 @@ import {
   getRestaurantByName,
   getRestaurants,
   updateRestaurant,
-} from "../models/Restaurant";
+} from "../models/Restaurant.ts";
 
 export const createRestaurantController = async (
   req: express.Request,
@@ -106,6 +106,8 @@ export const deleteRestaurantController = async (
     const { id } = req.params;
 
     const deletedRestaurant = await deleteRestaurant(id);
+
+    return res.json(deleteRestaurant);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Something went wrong" });
